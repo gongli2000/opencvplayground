@@ -29,6 +29,9 @@
 		460C8E091DFC98D40016DC84 /* libopencv_photo.2.4.13.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 460C8DF41DFC98D40016DC84 /* libopencv_photo.2.4.13.dylib */; };
 		460C8E0A1DFC98D40016DC84 /* libopencv_video.2.4.13.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 460C8DF51DFC98D40016DC84 /* libopencv_video.2.4.13.dylib */; };
 		460C8E0B1DFC98D40016DC84 /* libopencv_videostab.2.4.13.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 460C8DF61DFC98D40016DC84 /* libopencv_videostab.2.4.13.dylib */; };
+		460C8E0F1DFD1D8B0016DC84 /* tests.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 460C8E0D1DFD1D8B0016DC84 /* tests.cpp */; };
+		460C8E121DFD1DB40016DC84 /* perspectiveTransform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 460C8E101DFD1DB40016DC84 /* perspectiveTransform.cpp */; };
+		460C8E151DFDB69F0016DC84 /* drawing.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 460C8E131DFDB69F0016DC84 /* drawing.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -67,6 +70,12 @@
 		460C8DF41DFC98D40016DC84 /* libopencv_photo.2.4.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_photo.2.4.13.dylib; path = /usr/local/Cellar/opencv/2.4.13.1/lib/libopencv_photo.2.4.13.dylib; sourceTree = "<absolute>"; };
 		460C8DF51DFC98D40016DC84 /* libopencv_video.2.4.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_video.2.4.13.dylib; path = /usr/local/Cellar/opencv/2.4.13.1/lib/libopencv_video.2.4.13.dylib; sourceTree = "<absolute>"; };
 		460C8DF61DFC98D40016DC84 /* libopencv_videostab.2.4.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libopencv_videostab.2.4.13.dylib; path = /usr/local/Cellar/opencv/2.4.13.1/lib/libopencv_videostab.2.4.13.dylib; sourceTree = "<absolute>"; };
+		460C8E0D1DFD1D8B0016DC84 /* tests.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = tests.cpp; sourceTree = "<group>"; };
+		460C8E0E1DFD1D8B0016DC84 /* tests.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = tests.hpp; sourceTree = "<group>"; };
+		460C8E101DFD1DB40016DC84 /* perspectiveTransform.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = perspectiveTransform.cpp; sourceTree = "<group>"; };
+		460C8E111DFD1DB40016DC84 /* perspectiveTransform.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = perspectiveTransform.hpp; sourceTree = "<group>"; };
+		460C8E131DFDB69F0016DC84 /* drawing.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = drawing.cpp; sourceTree = "<group>"; };
+		460C8E141DFDB69F0016DC84 /* drawing.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = drawing.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +131,12 @@
 			isa = PBXGroup;
 			children = (
 				460C8DDB1DFC946D0016DC84 /* main.cpp */,
+				460C8E101DFD1DB40016DC84 /* perspectiveTransform.cpp */,
+				460C8E111DFD1DB40016DC84 /* perspectiveTransform.hpp */,
+				460C8E131DFDB69F0016DC84 /* drawing.cpp */,
+				460C8E141DFDB69F0016DC84 /* drawing.hpp */,
+				460C8E0D1DFD1D8B0016DC84 /* tests.cpp */,
+				460C8E0E1DFD1D8B0016DC84 /* tests.hpp */,
 			);
 			path = opencvplayground;
 			sourceTree = "<group>";
@@ -212,7 +227,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				460C8E151DFDB69F0016DC84 /* drawing.cpp in Sources */,
 				460C8DDC1DFC946D0016DC84 /* main.cpp in Sources */,
+				460C8E121DFD1DB40016DC84 /* perspectiveTransform.cpp in Sources */,
+				460C8E0F1DFD1D8B0016DC84 /* tests.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
