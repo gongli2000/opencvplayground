@@ -50,42 +50,52 @@ int maxcontourarea(vector<vector<Point>> &contours)
     return largest_contour_index;
 }
 
-vector<Point>  getBoundingRectOfGrid(VideoCapture& cap){
-    int ntries = 6;
-    vector<vector<Point>>  hulls;
-    vector<Point> boundingPoly;
+vector<Point> getBoundingRectOfBoard(Mat &frame){
     Mat canny_output,srcgray;
     vector<vector<Point> > contours;
     vector<Vec4i> hierarchy;
-    
+    vector<Point> hull;
     Mat edges;
+    
+    // Find edges of blurred black and white image
+    cvtColor(frame, edges, COLOR_BGR2GRAY);
+    GaussianBlur(edges, edges, Size(11,11), 1.5, 1.5);
+    Canny(edges, canny_output, 0, 30, 3);
+    
+    // Get contours from edges
+    findContours( canny_output, contours, hierarchy,
+                 CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
+    
+    // save the contour with max area as candidate for bounding rect
+    int max_area_index = maxcontourarea(contours);
+    convexHull( Mat(contours[max_area_index]), hull, false );
+    return hull;
+}
+
+vector<Point>  tryToGetBoundingRectOfBoard(VideoCapture& cap){
+    int ntries = 6;
+    vector<vector<Point>>  hulls;
+    Mat frame;
     // Try to find bounding rect contour ntries times
     // return the contour
     for(int cnt =0; cnt < ntries; cnt++){
-        Mat frame;
-        vector<Point> hull;
+     
         if(cap.read(frame)){
-            
-            // Find edges of blurred black and white image
-            cvtColor(frame, edges, COLOR_BGR2GRAY);
-            GaussianBlur(edges, edges, Size(11,11), 1.5, 1.5);
-            Canny(edges, canny_output, 0, 30, 3);
-            
-            // Get contours from edges
-            findContours( canny_output, contours, hierarchy,
-                         CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
-            
-            // save the contour with max area as candidate for bounding rect
-            int max_area_index = maxcontourarea(contours);
-            convexHull( Mat(contours[max_area_index]), hull, false );
-            hulls.push_back(hull);
+            hulls.push_back( getBoundingRectOfBoard(frame));
         }
     }
     // of all the candidates for bounding rect get the one with max area
     int i =maxcontourarea(hulls);
     
     // approximate the contour with a polygon hopefully with 4 vertices
+    vector<Point> boundingPoly;
     double perimeter_length = cv::arcLength(hulls[i],true);
     cv:: approxPolyDP( hulls[i], boundingPoly, 0.01*perimeter_length, true );
+    
+    // You may have gotten bounding rect of entire board and not just interior grid
+    // Now map the board using perspective transform and try to get the grid again.
+    if(cap.read(frame)){
+        
+    }
     return boundingPoly;
 }

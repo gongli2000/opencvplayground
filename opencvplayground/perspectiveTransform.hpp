@@ -19,7 +19,7 @@
 using namespace std;
 using namespace cv;
 
-vector<Point>  getBoundingRectOfGrid(VideoCapture& cap);
+vector<Point>  tryToGetBoundingRectOfBoard(VideoCapture& cap);
 
 Mat getPerspectiveMap(Size s, vector<cv::Point> &boardBoundingRect,int orientation,int dx);
 
