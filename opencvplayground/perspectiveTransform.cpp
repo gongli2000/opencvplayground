@@ -63,8 +63,7 @@ vector<Point> getBoundingRectOfBoard(Mat &frame){
     Canny(edges, canny_output, 0, 30, 3);
     
     // Get contours from edges
-    findContours( canny_output, contours, hierarchy,
-                 CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE, Point(0, 0) );
+    findContours(canny_output,contours,hierarchy,CV_RETR_TREE,CV_CHAIN_APPROX_SIMPLE,Point(0,0));
     
     // save the contour with max area as candidate for bounding rect
     int max_area_index = maxcontourarea(contours);
@@ -79,7 +78,7 @@ vector<Point>  tryToGetBoundingRectOfBoard(VideoCapture& cap){
     // Try to find bounding rect contour ntries times
     // return the contour
     for(int cnt =0; cnt < ntries; cnt++){
-     
+        
         if(cap.read(frame)){
             hulls.push_back( getBoundingRectOfBoard(frame));
         }
@@ -92,10 +91,6 @@ vector<Point>  tryToGetBoundingRectOfBoard(VideoCapture& cap){
     double perimeter_length = cv::arcLength(hulls[i],true);
     cv:: approxPolyDP( hulls[i], boundingPoly, 0.01*perimeter_length, true );
     
-    // You may have gotten bounding rect of entire board and not just interior grid
-    // Now map the board using perspective transform and try to get the grid again.
-    if(cap.read(frame)){
-        
-    }
+
     return boundingPoly;
 }
