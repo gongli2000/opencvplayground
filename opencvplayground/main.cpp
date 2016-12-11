@@ -49,13 +49,21 @@ void loopForBoundingRect()
     namedWindow( "Contours",CV_WINDOW_AUTOSIZE);
     int orientation = 2;
     Scalar color(0,0,255);
+
     for(;;){
         
         Mat cframe;
         cap >> cframe;
         
         if(loop || nomap ){
-            if(!orient) h = tryToGetBoundingRectOfBoard(cap);
+            if(!orient){
+                h = tryToGetBoundingRectOfBoard(cap);
+//                Mat temp = cframe.clone();
+//                Mat temp2;
+//                map = getPerspectiveMap(temp.size(), h,orientation,0);
+//                warpPerspective(temp, temp2, map, temp.size());
+//                h = getBoundingRectOfBoard(temp2);
+            }
             map = getPerspectiveMap(cframe.size(), h,orientation,delta);
             nomap = false;
             orient=false;

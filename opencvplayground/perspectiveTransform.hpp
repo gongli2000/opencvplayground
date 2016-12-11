@@ -20,7 +20,7 @@ using namespace std;
 using namespace cv;
 
 vector<Point>  tryToGetBoundingRectOfBoard(VideoCapture& cap);
-
+vector<Point> getBoundingRectOfBoard(Mat &frame);
 Mat getPerspectiveMap(Size s, vector<cv::Point> &boardBoundingRect,int orientation,int dx);
 
 //sdfsdfsdaf
