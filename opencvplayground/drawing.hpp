@@ -21,6 +21,6 @@ using namespace cv;
 
 void drawgrid(Mat &img, int delta, int boardsize, Scalar color, int thickness );
 
-
+void drawpoly(Mat& inputImage, vector<Point> &r, Scalar color, int thickness);
 
 #endif /* drawing_hpp */

@@ -21,3 +21,11 @@ void drawgrid(Mat &img, int delta, int boardsize, Scalar color, int thickness )
     line(img,Point(delta,img.rows-delta), Point(img.cols-delta,img.rows-delta),color,thickness);
     line(img,Point(img.cols-delta,delta), Point(img.cols-delta,img.rows-delta), color,thickness);
 }
+
+
+void drawpoly(Mat& inputImage, vector<Point> &r, Scalar color, int thickness){
+    for(int i=0;i<r.size();i++){
+        line(inputImage,r[i],r[(i+1) % r.size()],color,thickness);
+    }
+    
+}

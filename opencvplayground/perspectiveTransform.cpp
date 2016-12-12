@@ -32,7 +32,25 @@ Mat getPerspectiveMap(Size s, vector<cv::Point> &srcVec, int orientation,int dx)
     return cv::getPerspectiveTransform(src,dst);
 }
 
-
+Mat getInvPerspectiveMap(Size s, vector<cv::Point> &destVec, int orientation,int dx)
+{
+    Point2f src[]={
+        Point2f(dx,dx),
+        Point(s.width-dx,dx),
+        Point(s.width-dx,s.height-dx),
+        Point(dx,s.height-dx)};
+    
+    vector<int>  botIndices {0,1,2,3} ;
+    vector<int> rightIndices {1,2,3,0};
+    vector<int> leftIndices {2,3,0,1};
+    vector<int> topIndices {3,0,1,2};
+    vector< vector<int> > indicesArray = {rightIndices,botIndices,leftIndices,topIndices};
+    vector<int> indices = indicesArray[orientation];
+    
+    
+    Point2f dst[]={destVec[indices[0]],destVec[indices[1]],destVec[indices[2]],destVec[indices[3]]};
+    return cv::getPerspectiveTransform(src,dst);
+}
 int maxcontourarea(vector<vector<Point>> &contours)
 {
     int largest_area=0;

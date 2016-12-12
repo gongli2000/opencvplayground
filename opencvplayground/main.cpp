@@ -62,7 +62,10 @@ void loopForBoundingRect()
 //                Mat temp2;
 //                map = getPerspectiveMap(temp.size(), h,orientation,0);
 //                warpPerspective(temp, temp2, map, temp.size());
-//                h = getBoundingRectOfBoard(temp2);
+//                vector<Point> g = getBoundingRectOfBoard(temp2);
+//                
+//                Mat invmap = cv::getPerspectiveTransform(g,h);
+//                waitKey(0);
             }
             map = getPerspectiveMap(cframe.size(), h,orientation,delta);
             nomap = false;
@@ -72,19 +75,18 @@ void loopForBoundingRect()
         Mat mappedImage = cframe.clone();
         warpPerspective(cframe, mappedImage, map, cframe.size());
         
-        
-        vector<vector<Point>> rects;
-        rects.push_back(h);
-        drawContours(cframe, rects, 0,color,4,8,vector<Vec4i>(), 0,Point());
-       
+        drawpoly(cframe, h, color, 2);
         resize(cframe, cframe, Size(cframe.cols/2.5, cframe.rows/2.5));
         imshow( "Contours", cframe );
         moveWindow("Contours", 30, 30);
+    
     
         drawgrid(mappedImage, delta, boardsize, Scalar(0,255,0), 3);
         resize(mappedImage, mappedImage, Size(mappedImage.cols/2.7, mappedImage.rows/2));
         imshow("warped", mappedImage);
         moveWindow("warped",100 + cframe.cols, 30);
+        
+        
         switch(waitKey(1)){
             case 'c': nomap=true; break;
             case 'l': loop = !loop; break;
